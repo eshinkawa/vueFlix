@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js</title>
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.css" media="screen" title="no title" charset="utf-8">
+  <style>
+  [v-cloak] {
+    display: none;
+  }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="text-center">
+      <h1>NetFlix Database</h1><br>
+    </div>
+  </div>
+  <div class="container" id="bandApp">
+  <form class="form-inline text-center" role="form">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="O que procuras?" v-model="search">
+      </div>
+      <select v-model="selected">
+        <option>title</option>
+        <option selected>director</option>
+        <option>actor</option>
+      </select>
+       <button type="submit" class="btn btn-warning" @click.prevent="reset()">Reset</button>
+        <button type="submit" class="btn btn-primary" @click.prevent="justdoit(selected, search)">Procurar</button><br><br>
+    </form>
+
+    <div class="text-center" v-if="loading" ng-cloak>
+      <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+    <span class="sr-only">Loading...</span>
+    </div>
+    <div class="alert alert-danger fade in text-center" v-if="notFound" ng-cloak>
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>Nenhum resultado encontrado com estes critérios de pesquisa.</strong>
+    </div>
+    <table class="table table-bordered table-hover table-stripped" v-if="!loading" ng-cloak>
+      <thead>
+        <div v-for="movie in movieInfo">
+            <div class="row">
+              <div class="col-xs-6 text-right">
+                <img v-bind:src="movie.poster" height="300">
+              </div>
+              <div class="col-xs-6" v-cloak>
+                <h3>{{movie.show_title}} ({{movie.release_year}})</h3>
+                <p>{{movie.director}}</p>
+                <p>{{movie.summary}}</p>
+              </div>
+          </div><br><hr><br>
+        </div>
+      </thead>
+    </table>
+  </div>
+  <script src="/node_modules/jquery/dist/jquery.js"></script>
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="/node_modules/vue/dist/vue.js"></script>
+  <script src="/node_modules/vue-resource/dist/vue-resource.js"></script>
+  <script src="/node_modules/vue-strap/dist/vue-strap.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
