@@ -15,8 +15,14 @@ new Vue({
           this.notFound = false;
           this.loading = true;
           this.$http.get('http://netflixroulette.net/api/api.php?' + typeSearch + '=' + search).then(function (response) {
+            //console.log( response.data );
             this.loading = false;
-            this.$set('movieInfo', response.data);
+
+            if(typeSearch == 'title'){
+              this.$set('movieInfo[0]', response.data);
+            } else
+              this.$set('movieInfo', response.data);
+
           }, (response) => {
             this.loading = false;
             this.notFound = true;

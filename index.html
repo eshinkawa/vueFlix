@@ -2,32 +2,45 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Vue.js</title>
+  <title>Vue.js Netflix APP</title>
   <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css" media="screen" title="no title" charset="utf-8">
   <link rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.css" media="screen" title="no title" charset="utf-8">
   <style>
   [v-cloak] {
     display: none;
   }
+
+  .header{
+    background-color: #b9090b;
+    width: 100%;
+    color: #fff
+  }
+
   </style>
 </head>
 <body>
-  <div class="container">
+
+  <div class="container header">
     <div class="text-center">
-      <h1>NetFlix Database</h1><br>
+      <br>
+      <img src="http://netflixroulette.net/img/logo.png" alt="">
+      <br><br>
+      <h2>WITH VUE.JS</h2>
     </div>
   </div>
-  <div class="container" id="bandApp">
+
+  <div class="container" id="bandApp"><br><br>
+
   <form class="form-inline text-center" role="form">
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="O que procuras?" v-model="search">
+        <input type="text" class="form-control" placeholder="Procurando algo?" v-model="search">
       </div>
       <select v-model="selected">
         <option>title</option>
         <option selected>director</option>
         <option>actor</option>
       </select>
-       <button type="submit" class="btn btn-warning" @click.prevent="reset()">Reset</button>
+        <button type="submit" class="btn btn-warning" @click.prevent="reset()">Reset</button>
         <button type="submit" class="btn btn-primary" @click.prevent="justdoit(selected, search)">Procurar</button><br><br>
     </form>
 
@@ -35,10 +48,12 @@
       <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
     <span class="sr-only">Loading...</span>
     </div>
+
     <div class="alert alert-danger fade in text-center" v-if="notFound" ng-cloak>
       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
       <strong>Nenhum resultado encontrado com estes critérios de pesquisa.</strong>
     </div>
+
     <table class="table table-bordered table-hover table-stripped" v-if="!loading" ng-cloak>
       <thead>
         <div v-for="movie in movieInfo">
@@ -48,13 +63,26 @@
               </div>
               <div class="col-xs-6" v-cloak>
                 <h3>{{movie.show_title}} ({{movie.release_year}})</h3>
-                <p>{{movie.director}}</p>
-                <p>{{movie.summary}}</p>
+                <div class="row">
+                  <div class="col-xs-2 text-right"><strong>Diretor:</strong></div>
+                  <div class="col-xs-10"><p>{{movie.director}}</p></div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-2 text-right"><strong>Elenco:</strong></div>
+                  <div class="col-xs-10"><p>{{movie.show_cast}}</p></div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-2 text-right"><strong>Sinopse:</strong></div>
+                  <div class="col-xs-10"><p>{{movie.summary}}</p></div>
+                </div>
+
+
               </div>
           </div><br><hr><br>
         </div>
       </thead>
     </table>
+
   </div>
   <script src="/node_modules/jquery/dist/jquery.js"></script>
   <script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
