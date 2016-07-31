@@ -16,6 +16,10 @@
     color: #fff
   }
 
+  .text-right{
+    margin-left: auto;
+  }
+
   </style>
 </head>
 <body>
@@ -25,7 +29,7 @@
       <br>
       <img src="http://netflixroulette.net/img/logo.png" alt="">
       <br><br>
-      <h2>WITH VUE.JS</h2>
+      <h6>Feito com <img src="http://vuejs.org/images/logo.png" alt="" height="35"></h6>
     </div>
   </div>
 
@@ -59,10 +63,11 @@
         <div v-for="movie in movieInfo">
             <div class="row">
               <div class="col-xs-6 text-right">
-                <img v-bind:src="movie.poster" height="300">
+                <img v-bind:src="movie.poster" height="300" class="img-responsive text-right">
               </div>
               <div class="col-xs-6" v-cloak>
                 <h3>{{movie.show_title}} ({{movie.release_year}})</h3>
+                <br>
                 <div class="row">
                   <div class="col-xs-2 text-right"><strong>Diretor:</strong></div>
                   <div class="col-xs-10"><p>{{movie.director}}</p></div>
