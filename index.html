@@ -33,7 +33,7 @@
     </div>
   </div>
 
-  <div class="container" id="bandApp"><br><br>
+  <div class="container" id="movieApp"><br><br>
 
   <form class="form-inline text-center" role="form">
       <div class="form-group">
@@ -41,11 +41,12 @@
       </div>
       <select v-model="selected">
         <option>title</option>
-        <option selected>director</option>
-        <option>actor</option>
+        <option>director</option>
+        <option selected>actor</option>
       </select>
         <button type="submit" class="btn btn-warning" @click.prevent="reset()">Reset</button>
-        <button type="submit" class="btn btn-primary" @click.prevent="justdoit(selected, search)">Procurar</button><br><br>
+        <button type="submit" class="btn btn-primary" @click.prevent="goSearch(selected, search)">Procurar</button>
+        <button type="submit" class="btn btn-danger pull-right" @click.prevent="getMyMovies()">Meus filmes</button><br><br>
     </form>
 
     <div class="text-center" v-if="loading" ng-cloak>
@@ -80,7 +81,9 @@
                   <div class="col-xs-2 text-right"><strong>Sinopse:</strong></div>
                   <div class="col-xs-10"><p>{{movie.summary}}</p></div>
                 </div>
-
+                <div class="row text-right">
+                  <button type="submit" class="btn btn-warning" @click.prevent="saveMovie(movie)">Salvar na minha galeria</button>
+                </div>
 
               </div>
           </div><br><hr><br>

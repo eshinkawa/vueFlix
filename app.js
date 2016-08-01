@@ -1,6 +1,6 @@
 
 new Vue({
-  el: '#bandApp',
+  el: '#movieApp',
   data: {
     movieInfo: [],
     selected: "movie",
@@ -10,7 +10,7 @@ new Vue({
   },
 
   methods: {
-      justdoit: function(typeSearch, search) {
+      goSearch: function(typeSearch, search) {
           this.movieInfo = [];
           this.notFound = false;
           this.loading = true;
@@ -28,6 +28,28 @@ new Vue({
             this.notFound = true;
         });
        },
+       getMyMovies: function() {
+         this.movieInfo = [];
+         this.loading = true;
+         this.$http.get('http://localhost:3030/movies').then(function (response) {
+         this.$set('movieInfo', response.data);
+         this.loading = false;
+
+        })
+       },
+       saveMovie: function(movie) {
+         this.$http.post('http://localhost:3030/movies', movie).then(function (response) {
+           console.log("caiu aqui");
+           console.log(response.status);
+           alert("Filme salvo com sucesso na galeria!");
+         })
+        },
+        deleteMovie: function(movie) {
+          console.log("caiu aqui");
+          this.$http.delete('http://localhost:3030/movies').then(function (response) {
+            console.log("caiu aqui");
+          })
+         },
        reset: function() {
             this.movieInfo = [];
         }
